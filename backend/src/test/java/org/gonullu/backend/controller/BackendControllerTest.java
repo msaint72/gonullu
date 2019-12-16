@@ -1,7 +1,7 @@
-package de.jonashackt.springbootvuejs.controller;
+package org.gonullu.backend.controller;
 
-import de.jonashackt.springbootvuejs.SpringBootVuejsApplication;
-import de.jonashackt.springbootvuejs.domain.User;
+import org.gonullu.backend.SpringBootVuejsApplication;
+import org.gonullu.backend.domain.User;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.junit.Before;

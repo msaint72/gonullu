@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.domain;
+package org.gonullu.backend.domain;
 
 import javax.persistence.*;
 
