@@ -1,9 +1,8 @@
 <template>
   <div class="service">
-    <h1>{{ msg }}</h1>
-    <h2>REST service call results</h2>
+    <h3>{{ msg }}</h3>
 
-    <button @click="callHelloApi()">CALL Spring Boot REST backend service</button>
+    <button @click="callHelloApi()"> Backend Call</button>
 
     <h4>Backend response: {{ backendResponse }}</h4>
 
@@ -18,7 +17,7 @@
 
     data () {
       return {
-        msg: 'HowTo call REST-Services:',
+        msg: 'Java backend de calısan rest endpointleri invoke ornek',
         backendResponse: [],
         errors: []
       }
@@ -42,7 +41,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
+  h1, h2 ,h3{
     font-weight: normal;
   }
 

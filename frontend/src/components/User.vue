@@ -1,8 +1,8 @@
 <template>
   <div class="user">
-    <h1>Create User</h1>
+    <h4>Create User</h4>
 
-    <h3>Just some database interaction...</h3>
+    <h5>Sample database interaction...</h5>
 
     <input type="text" v-model="user.firstName" placeholder="first name">
     <input type="text" v-model="user.lastName" placeholder="last name">
