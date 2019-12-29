@@ -23,7 +23,7 @@ public class Organization {
     private String web;
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    private User adminUser;
+    private UserEntity adminUser;
     @ManyToMany()
     @JoinTable(name="ORGANIZATION_CAUSE",
     joinColumns = @JoinColumn(name="ORGANIZATION_ID"),
@@ -86,11 +86,11 @@ public class Organization {
         this.web = web;
     }
 
-    public User getAdminUser() {
+    public UserEntity getAdminUser() {
         return adminUser;
     }
 
-    public void setAdminUser(User adminUser) {
+    public void setAdminUser(UserEntity adminUser) {
         this.adminUser = adminUser;
     }
 

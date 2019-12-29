@@ -18,7 +18,7 @@ public class Cause {
     private List<Organization> organizations=new ArrayList<>();
     @JsonIgnore
     @ManyToMany(mappedBy = "causes")
-    private List<User> users=new ArrayList<>();
+    private List<UserEntity> users=new ArrayList<>();
 
     public List<Organization> getOrganizations() {
         return organizations;
@@ -45,11 +45,11 @@ public class Cause {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public List<UserEntity> getUsers() {
         return users;
     }
 
-    public void addUser(User user) {
+    public void addUser(UserEntity user) {
         this.users.add( user);
     }
 }

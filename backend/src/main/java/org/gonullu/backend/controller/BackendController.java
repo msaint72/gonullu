@@ -1,11 +1,12 @@
 package org.gonullu.backend.controller;
 
 import org.gonullu.backend.domain.Organization;
-import org.gonullu.backend.domain.User;
+import org.gonullu.backend.domain.UserEntity;
+import org.gonullu.backend.exception.NotFoundException;
 import org.gonullu.backend.exception.OrganizationNotFoundException;
-import org.gonullu.backend.exception.UserNotFoundException;
 import org.gonullu.backend.repository.OrganizationRepository;
 import org.gonullu.backend.repository.UserRepository;
+import org.gonullu.backend.ws.model.response.UserRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +36,31 @@ public class BackendController {
     @RequestMapping(path = "/user/{lastName}/{firstName}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public long addNewUser (@PathVariable("lastName") String lastName, @PathVariable("firstName") String firstName) {
-        User savedUser = userRepository.save(new User(firstName, lastName));
+        UserEntity savedUser = userRepository.save(new UserEntity(firstName, lastName));
 
         LOG.info(savedUser.toString() + " successfully saved into DB");
 
         return savedUser.getId();
     }
 
-    @GetMapping(path = "/user/{id}")
-    public User getUserById(@PathVariable("id") long id) {
+  /*  @GetMapping(path = "/user/{id}")
+    public UserEntity getUserById(@PathVariable("id") long id) {
 
         return userRepository.findById(id).map(user -> {
             LOG.info("Reading user with id " + id + " from database.");
             return user;
-        }).orElseThrow(() -> new UserNotFoundException("The user with the id " + id + " couldn't be found in the database."));
+        }).orElseThrow(() -> new NotFoundException("The user with the id " + id + " couldn't be found in the database."));
+    }
+*/
+    @GetMapping(path = "/user/{id}")
+    public UserEntity getUserByUserId(@PathVariable("id") long id) {
+        UserRest returnValue=new UserRest();
+
+
+        return userRepository.findById(id).map(user -> {
+            LOG.info("Reading user with id " + id + " from database.");
+            return user;
+        }).orElseThrow(() -> new NotFoundException("The user with the id " + id + " couldn't be found in the database."));
     }
 
     @GetMapping(path = "/organization/{id}")

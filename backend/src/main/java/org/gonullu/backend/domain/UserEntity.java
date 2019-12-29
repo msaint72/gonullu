@@ -1,37 +1,44 @@
 package org.gonullu.backend.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="users")
-public class User {
+public class UserEntity implements Serializable {
 
+    private static final long serialVersionUID = 8321567738893922442L;
     // PrimaryKey
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false,length = 50)
     private String firstName;
+    @Column(nullable = false,length = 50)
     private String lastName;
+    private String userId;
+    private String encryptedPassword;
     private String profileImage;
     private String mobilePhone;
-    private String eMail;
+    @Column(nullable = false,unique = true)
+    private String email;
     private Date dateOfBirth;
-    private String tShirtSize;
+    private String tshirtSize;
     private String gender;
     @OneToOne()
     private Address address;
     private String emergencyContactNumber;
     private String emergencyContactName;
     private String motivation;
-    private Boolean affiliation;
+    private Boolean affiliation=false;
     private String schoolName;
     private String companyName;
-    private Boolean getInfoMails;
-    private Boolean invisible;
+    private Boolean getInfoMails=false;
+    private Boolean invisible=false;
     @OneToOne(fetch=FetchType.LAZY,mappedBy = "adminUser")
     private Organization adminOf;
 
@@ -41,16 +48,16 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="CAUSE_ID"))
     private List<Cause> causes=new ArrayList<>();
 
-    protected User() {}
+    public UserEntity()  {}
 
-    public User(String firstName, String lastName, String profileImage, String mobilePhone, String eMail, Date dateOfBirth, String tShirtSize, String gender, String emergencyContactNumber, String emergencyContactName, String motivation, Boolean affiliation, String schoolName, String companyName, Boolean getInfoMails, Boolean invisible) {
+    public UserEntity(String firstName, String lastName, String profileImage, String mobilePhone, String email, Date dateOfBirth, String tshirtSize, String gender, String emergencyContactNumber, String emergencyContactName, String motivation, Boolean affiliation, String schoolName, String companyName, Boolean getInfoMails, Boolean invisible) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profileImage = profileImage;
         this.mobilePhone = mobilePhone;
-        this.eMail = eMail;
+        this.email = email;
         this.dateOfBirth = dateOfBirth;
-        this.tShirtSize = tShirtSize;
+        this.tshirtSize = tshirtSize;
         this.gender = gender;
         this.emergencyContactNumber = emergencyContactNumber;
         this.emergencyContactName = emergencyContactName;
@@ -62,7 +69,7 @@ public class User {
         this.invisible = invisible;
     }
 
-    public User(String firstName, String lastName) {
+    public UserEntity(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -94,16 +101,32 @@ public class User {
         return id;
     }
 
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getUserId() {
+        return userId;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getProfileImage() {
@@ -130,12 +153,12 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String gettShirtSize() {
-        return tShirtSize;
+    public String getTshirtSize() {
+        return tshirtSize;
     }
 
-    public void settShirtSize(String tShirtSize) {
-        this.tShirtSize = tShirtSize;
+    public void setTshirtSize(String tshirtSize) {
+        this.tshirtSize = tshirtSize;
     }
 
     public String getGender() {

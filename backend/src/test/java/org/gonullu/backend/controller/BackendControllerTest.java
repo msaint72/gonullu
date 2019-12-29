@@ -1,7 +1,7 @@
 package org.gonullu.backend.controller;
 
 import org.gonullu.backend.SpringBootVuejsApplication;
-import org.gonullu.backend.domain.User;
+import org.gonullu.backend.domain.UserEntity;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
@@ -45,7 +45,7 @@ public class BackendControllerTest {
 
 	@Test
     public void addNewUserAndRetrieveItBack() {
-        User norbertSiegmund = new User("Norbert", "Siegmund");
+        UserEntity norbertSiegmund = new UserEntity("Norbert", "Siegmund");
 
         Long userId =
             given()
@@ -58,7 +58,7 @@ public class BackendControllerTest {
                 .extract()
                     .body().as(Long.class);
 
-	    User responseUser =
+	    UserEntity responseUser =
             given()
                     .pathParam("id", userId)
                 .when()
@@ -66,7 +66,7 @@ public class BackendControllerTest {
                 .then()
                     .statusCode(HttpStatus.SC_OK)
                     .assertThat()
-                        .extract().as(User.class);
+                        .extract().as(UserEntity.class);
 
 	    // Did Norbert came back?
         assertThat(responseUser.getFirstName(), is("Norbert"));
