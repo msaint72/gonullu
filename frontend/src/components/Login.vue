@@ -4,13 +4,16 @@
     <h5>try to remember that... </h5>
   </div>
   <div class="unprotected" v-else>
-
-    <form @submit.prevent="callLogin()">
-      <input type="text" placeholder="email" v-model="email">
-      <input type="password" placeholder="password" v-model="password">
-      <b-btn variant="success" type="submit">Login</b-btn>
-      <p v-if="error" class="error">Bad login information</p>
-    </form>
+    <b-container>
+      <form @submit.prevent="callLogin()">
+        <b-form-row class="justify-content-center">
+          <b-col class="login" sm="4"><b-input type="text" placeholder="email" v-model="email"></b-input></b-col>
+          <b-col class="login" sm="4"><b-input type="password" placeholder="password" v-model="password"></b-input></b-col>
+          <b-col sm="1"><b-btn variant="success" type="submit">Login</b-btn></b-col>
+        </b-form-row>
+        <p v-if="error" class="error">Bad login information</p>
+      </form>
+    </b-container>
   </div>
 
 </template>
@@ -31,7 +34,7 @@ export default {
   methods: {
     callLogin() {
       this.errors = [];
-      this.$store.dispatch("login", { email: this.email, password: this.password})
+      this.$store.dispatch("login", { user: this.user, password: this.password})
         .then(() => {
           this.$router.push('/Protected')
         })
