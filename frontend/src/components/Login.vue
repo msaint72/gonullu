@@ -6,7 +6,7 @@
   <div class="unprotected" v-else>
 
     <form @submit.prevent="callLogin()">
-      <input type="text" placeholder="username" v-model="user">
+      <input type="text" placeholder="email" v-model="email">
       <input type="password" placeholder="password" v-model="password">
       <b-btn variant="success" type="submit">Login</b-btn>
       <p v-if="error" class="error">Bad login information</p>
@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       loginError: false,
-      user: '',
+      email: '',
       password: '',
       error: false,
       errors: []
@@ -31,7 +31,7 @@ export default {
   methods: {
     callLogin() {
       this.errors = [];
-      this.$store.dispatch("login", { user: this.user, password: this.password})
+      this.$store.dispatch("login", { email: this.email, password: this.password})
         .then(() => {
           this.$router.push('/Protected')
         })

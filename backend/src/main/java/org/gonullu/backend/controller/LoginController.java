@@ -17,7 +17,7 @@ public class LoginController {
     UserService userService;
 
     @PostMapping
-    @RequestMapping("/users/login/signup")
+    @RequestMapping("/api/user")
     public UserRest userSignUp(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
         UserRest returnValue=new UserRest();
 

@@ -27,8 +27,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No session will be created or used by spring security
         .and()
             .authorizeRequests()
-                .antMatchers("/h2-console/*").permitAll()
-                .antMatchers("/users/login/**").permitAll()
+                .antMatchers("/api/hello").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/api/user/**").permitAll() // allow every URI, that begins with '/api/user/'
+                .antMatchers("/api/secured").authenticated()
                 .anyRequest().authenticated() // protect all other requests
         .and()
             .csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL PUT, POST, DELETE will get HTTP 403!
@@ -46,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     public AuthenticationFilter getAuthenticationFilter() throws Exception{
         final AuthenticationFilter filter=new AuthenticationFilter(authenticationManager());
-        filter.setFilterProcessesUrl("/users/login");
+        filter.setFilterProcessesUrl("/api/secured/");
         return filter;
     }
 }

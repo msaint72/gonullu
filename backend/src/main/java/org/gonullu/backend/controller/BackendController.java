@@ -32,7 +32,7 @@ public class BackendController {
         LOG.info("GET called on /hello resource");
         return HELLO_TEXT;
     }
-
+/*
     @RequestMapping(path = "/user/{lastName}/{firstName}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public long addNewUser (@PathVariable("lastName") String lastName, @PathVariable("firstName") String firstName) {
@@ -41,9 +41,9 @@ public class BackendController {
         LOG.info(savedUser.toString() + " successfully saved into DB");
 
         return savedUser.getId();
-    }
+    }*/
 
-  /*  @GetMapping(path = "/user/{id}")
+/*   @GetMapping(path = "/user/{id}")
     public UserEntity getUserById(@PathVariable("id") long id) {
 
         return userRepository.findById(id).map(user -> {
@@ -52,16 +52,6 @@ public class BackendController {
         }).orElseThrow(() -> new NotFoundException("The user with the id " + id + " couldn't be found in the database."));
     }
 */
-    @GetMapping(path = "/user/{id}")
-    public UserEntity getUserByUserId(@PathVariable("id") long id) {
-        UserRest returnValue=new UserRest();
-
-
-        return userRepository.findById(id).map(user -> {
-            LOG.info("Reading user with id " + id + " from database.");
-            return user;
-        }).orElseThrow(() -> new NotFoundException("The user with the id " + id + " couldn't be found in the database."));
-    }
 
     @GetMapping(path = "/organization/{id}")
     public Organization getOrganizationById(@PathVariable("id") long id) {

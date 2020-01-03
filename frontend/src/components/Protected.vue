@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getSecuredTextFromBackend() {
-      api.getSecured(store.getters.getUserName, store.getters.getUserPass)
+      api.getSecured(store.getters.getEmail, store.getters.getUserPass)
               .then(response => {
                 console.log("Response: '" + response.data + "' with Statuscode " + response.status);
                 this.securedApiCallSuccess = true;

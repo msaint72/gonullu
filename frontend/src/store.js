@@ -8,32 +8,32 @@ export default new Vuex.Store({
     state: {
         loginSuccess: false,
         loginError: false,
-        userName: null,
+        email: null,
         userPass: null
     },
     mutations: {
         login_success(state, payload){
             state.loginSuccess = true;
-            state.userName = payload.userName;
+            state.email = payload.email;
             state.userPass = payload.userPass;
         },
         login_error(state, payload){
             state.loginError = true;
-            state.userName = payload.userName;
+            state.email = payload.email;
         }
     },
     actions: {
-        login({commit}, {user, password}) {
+        login({commit}, {email, password}) {
             return new Promise((resolve, reject) => {
-                console.log("Accessing backend with user: '" + user);
-                api.getSecured(user, password)
+                console.log("Accessing backend with email: '" + email);
+                api.getSecured(email, password)
                     .then(response => {
                         console.log("Response: '" + response.data + "' with Statuscode " + response.status);
                         if(response.status == 200) {
                             console.log("Login successful");
                             // place the loginSuccess state into our vuex store
                             commit('login_success', {
-                                userName: user,
+                                email: email,
                                 userPass: password
                             });
                         }
@@ -43,7 +43,7 @@ export default new Vuex.Store({
                         console.log("Error: " + error);
                         // place the loginError state into our vuex store
                         commit('login_error', {
-                            userName: user
+                            email: email
                         });
                         reject("Invalid credentials!")
                     })
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     getters: {
         isLoggedIn: state => state.loginSuccess,
         hasLoginErrored: state => state.loginError,
-        getUserName: state => state.userName,
+        getEmail: state => state.email,
         getUserPass: state => state.userPass
     }
 })

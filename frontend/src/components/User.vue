@@ -6,12 +6,14 @@
 
     <input type="text" v-model="user.firstName" placeholder="first name">
     <input type="text" v-model="user.lastName" placeholder="last name">
+    <input type="text" v-model="user.email" placeholder="email">
+    <input type="text" v-model="user.password" placeholder="password">
 
     <button @click="createNewUser()">Create User</button>
 
-    <div v-if="showResponse"><h6>User created with Id: {{ response }}</h6></div>
+    <div v-if="showResponse"><h6>User created with Id: {{ user.userId }}</h6></div>
 
-    <button v-if="showResponse" @click="retrieveUser()">Retrieve user {{user.id}} data from database</button>
+    <button v-if="showResponse" @click="retrieveUser()">Retrieve user {{user.userId}} data from database</button>
 
     <h4 v-if="showRetrievedUser">Retrieved User {{retrievedUser.firstName}} {{retrievedUser.lastName}}</h4>
 
@@ -31,7 +33,9 @@
         user: {
           lastName: '',
           firstName: '',
-          id: 0
+          email: '',
+          password: '',
+          userId: ''
         },
         showResponse: false,
         retrievedUser: {},
@@ -42,11 +46,14 @@
       // Fetches posts when the component is created.
       createNewUser () {
 
-        api.createUser(this.user.firstName, this.user.lastName).then(response => {
+        api.createUser(this.user.firstName,
+                      this.user.lastName,
+                      this.user.email,
+                      this.user.password).then(response => {
             // JSON responses are automatically parsed.
             this.response = response.data;
-            this.user.id = response.data;
-            console.log('Created new User with Id ' + response.data);
+            this.user.userId = response.data.userId;
+            console.log('Created new User with this data: ' + response.data);
             this.showResponse = true
           })
           .catch(e => {
@@ -54,7 +61,7 @@
           })
       },
       retrieveUser () {
-        api.getUser(this.user.id).then(response => {
+        api.getUser(this.user.userId).then(response => {
             // JSON responses are automatically parsed.
             this.retrievedUser = response.data;
             this.showRetrievedUser = true

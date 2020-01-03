@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(String userId) {
+    public UserDto getUserByUserId(String userId) {
         UserEntity userEntity=userRepository.findByUserId(userId);
         if(userEntity==null) throw new UsernameNotFoundException(userId);
         UserDto returnValue=new UserDto();

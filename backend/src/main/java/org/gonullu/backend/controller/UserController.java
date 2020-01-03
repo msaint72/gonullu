@@ -9,16 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="users")
+@RequestMapping(path="/api/user")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping(path="/{id}")
-    public UserRest getUser(@PathVariable String id) throws Exception {
+    @GetMapping(path="/{userId}")
+    public UserRest getUser(@PathVariable String userId) throws Exception {
         UserRest returnValue=new UserRest();
 
-        UserDto userDto=userService.getUserById(id);
+        UserDto userDto=userService.getUserByUserId(userId);
         BeanUtils.copyProperties(userDto,returnValue);
         return  returnValue;
     }
