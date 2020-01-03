@@ -3,15 +3,49 @@
     <h4>Create User</h4>
 
     <h5>Sample database interaction...</h5>
+    <div v-if="showResponse">
+      <b-alert variant="success" show>User created with Id: {{ user.userId }}</b-alert>
+    </div>
+    <b-container>
+      <b-form-row class="justify-content-center">
+        <b-col sm="2">
+          <label>Firstname :</label>
+        </b-col>
+        <b-col  sm="6">
+          <b-input type="text"  v-model="user.firstName" placeholder="first name"></b-input>
+        </b-col>
+      </b-form-row>
+      <b-form-row class="justify-content-center">
+        <b-col sm="2">
+          <label>Lastname :</label>
+        </b-col>
+        <b-col  sm="6">
+          <b-input type="text" v-model="user.lastName" placeholder="last name"></b-input>
+        </b-col>
+      </b-form-row>
+      <b-form-row class="justify-content-center">
+        <b-col sm="2">
+          <label>Email :</label>
+        </b-col>
+        <b-col  sm="6">
+          <b-input  type="text" v-model="user.email" placeholder="email"></b-input>
+        </b-col>
+      </b-form-row>
 
-    <input type="text" v-model="user.firstName" placeholder="first name">
-    <input type="text" v-model="user.lastName" placeholder="last name">
-    <input type="text" v-model="user.email" placeholder="email">
-    <input type="text" v-model="user.password" placeholder="password">
-
-    <button @click="createNewUser()">Create User</button>
-
-    <div v-if="showResponse"><h6>User created with Id: {{ user.userId }}</h6></div>
+      <b-form-row class="justify-content-center">
+        <b-col sm="2">
+          <label>Password :</label>
+        </b-col>
+        <b-col  sm="6">
+          <b-input type="password" v-model="user.password" placeholder="password"></b-input>
+        </b-col>
+      </b-form-row>
+      <b-form-row class="justify-content-center">
+      <b-col sm="3">
+        <b-btn variant="success" @click="createNewUser()">Create User</b-btn>
+      </b-col>
+      </b-form-row>
+    </b-container>
 
     <button v-if="showResponse" @click="retrieveUser()">Retrieve user {{user.userId}} data from database</button>
 
@@ -94,5 +128,8 @@
 
   a {
     color: #42b983;
+  }
+  div {
+    padding-bottom: 10px;
   }
 </style>
