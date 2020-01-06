@@ -6,6 +6,7 @@
     <div v-if="showResponse">
       <b-alert variant="success" show>User created with Id: {{ user.userId }}</b-alert>
     </div>
+    <ValidationObserver v-slot="{ handleSubmit }">
     <b-container>
       <b-form-row class="justify-content-center">
         <b-col sm="2">
@@ -13,6 +14,7 @@
         </b-col>
         <b-col  sm="6">
           <b-input type="text"  v-model="user.firstName" placeholder="first name"></b-input>
+
         </b-col>
       </b-form-row>
       <b-form-row class="justify-content-center">
@@ -28,7 +30,10 @@
           <label>Email :</label>
         </b-col>
         <b-col  sm="6">
+          <ValidationProvider name="E-mail" rules="required|email" v-slot="{ errors }">
           <b-input  type="text" v-model="user.email" placeholder="email"></b-input>
+            <span>{{ errors[0] }}</span>
+          </ValidationProvider>
         </b-col>
       </b-form-row>
 
@@ -42,11 +47,11 @@
       </b-form-row>
       <b-form-row class="justify-content-center">
       <b-col sm="3">
-        <b-btn variant="success" @click="createNewUser()">Create User</b-btn>
+        <b-btn variant="success" @click="handleSubmit(createNewUser)">Create User</b-btn>
       </b-col>
       </b-form-row>
     </b-container>
-
+    </ValidationObserver>
     <button v-if="showResponse" @click="retrieveUser()">Retrieve user {{user.userId}} data from database</button>
 
     <h4 v-if="showRetrievedUser">Retrieved User {{retrievedUser.firstName}} {{retrievedUser.lastName}}</h4>
