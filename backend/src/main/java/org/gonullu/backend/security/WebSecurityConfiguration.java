@@ -46,8 +46,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .withUser("foo").password("{noop}bar").roles("USER");
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
+
+
     public AuthenticationFilter getAuthenticationFilter() throws Exception{
-        final AuthenticationFilter filter=new AuthenticationFilter(authenticationManager());
+        final AuthenticationFilter filter=new AuthenticationFilter(authenticationManager(),userService);
         filter.setFilterProcessesUrl("/api/secured/");
         return filter;
     }

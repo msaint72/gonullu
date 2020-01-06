@@ -2,7 +2,6 @@ package org.gonullu.backend.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.gonullu.backend.SpringApplicationContext;
 import org.gonullu.backend.service.UserService;
 import org.gonullu.backend.ws.model.request.LoginRequestModel;
 import org.gonullu.backend.ws.shared.dto.UserDto;
@@ -25,10 +24,15 @@ import io.jsonwebtoken.Jwts;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
+    private final UserService userService;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager){
+
+
+    public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService){
         this.authenticationManager=authenticationManager;
+        this.userService=userService;
     }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws AuthenticationException {
         try {
@@ -45,6 +49,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     protected void successfulAuthentication(HttpServletRequest servletRequest,
                                             HttpServletResponse servletResponse,
@@ -57,7 +62,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .setExpiration(new Date(System.currentTimeMillis()+SecurityConstants.EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512,SecurityConstants.TOKEN_SECRET)
                 .compact();
-        UserService userService= (UserService) SpringApplicationContext.getBean("userServiceImpl");
         UserDto userDto=userService.getUser(userName);
 
         servletResponse.addHeader(SecurityConstants.HEADER_STRING,SecurityConstants.TOKEN_PREFIX+token);
