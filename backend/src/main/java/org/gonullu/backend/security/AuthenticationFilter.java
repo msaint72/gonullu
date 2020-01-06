@@ -2,7 +2,6 @@ package org.gonullu.backend.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.gonullu.backend.SpringApplicationContext;
 import org.gonullu.backend.service.UserService;
 import org.gonullu.backend.ws.model.request.LoginRequestModel;
 import org.gonullu.backend.ws.shared.dto.UserDto;

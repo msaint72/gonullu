@@ -17,7 +17,5 @@ public class SpringBootVuejsApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public SpringApplicationContext springApplicationContext(){return new SpringApplicationContext();}
 
 }
