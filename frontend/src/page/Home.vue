@@ -1,13 +1,15 @@
 <template>
-  <div class="hello">
+  <separator>
     <h1>{{ hellomsg }}</h1>
-  </div>
-
+    <img  style="max-height: 300px; max-widows: 1000px;" src="./../assets/Vhands.jpg">
+  </separator>
 </template>
 
 <script>
+  import Separator from '../components/Separator.vue'
 export default {
-  name: 'hello',
+  name: 'Home',
+  components : {Separator},
   props: { hellomsg: { type: String, required: true } }
 }
 
@@ -16,3 +18,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
+

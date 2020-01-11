@@ -1,9 +1,10 @@
 <template>
+<div>
   <div class="unprotected" v-if="loginError">
     <h3><b-badge variant="danger">wrong password ?</b-badge></h3>
     <h5>try to remember that... </h5>
   </div>
-  <div class="unprotected" v-else>
+  <div class="unprotected">
     <b-container>
       <form @submit.prevent="callLogin()">
         <b-form-row class="justify-content-center">
@@ -15,7 +16,7 @@
       </form>
     </b-container>
   </div>
-
+</div>
 </template>
 
 <script>

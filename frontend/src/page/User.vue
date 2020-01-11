@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <h4>Create User</h4>
+    <h4>Sign Up</h4>
 
     <h5>Sample database interaction...</h5>
     <div v-if="showResponse">
@@ -78,10 +78,10 @@
 </template>
 
 <script>
-  import api from "./backend-api";
+  import api from "../components/backend-api";
   import { required, email, minLength, sameAs }  from 'vuelidate/lib/validators'
   export default {
-    name: 'user',
+    name: 'SignUp',
 
     data () {
       return {
