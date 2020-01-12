@@ -6,21 +6,32 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        loginSuccess: false,
+        loginStatus: false,
         loginError: false,
         email: null,
         userPass: null
     },
     mutations: {
         login_success(state, payload){
-            state.loginSuccess = true;
+            state.loginStatus = true;
             state.email = payload.email;
             state.userPass = payload.userPass;
+            localStorage.setItem('isLoggedIn', 'true')
         },
         login_error(state, payload){
             state.loginError = true;
             state.email = payload.email;
-        }
+        },
+        logout(state){
+            state.loginStatus = false;
+            state.userPass =null;
+            state.email = null;
+            localStorage.setItem('isLoggedIn', 'false')
+        },
+        setLogin(state,payload){
+            state.loginStatus = payload == 'true' ? true : false;
+        },
+
     },
     actions: {
         login({commit}, {email, password}) {
@@ -36,6 +47,7 @@ export default new Vuex.Store({
                                 email: email,
                                 userPass: password
                             });
+
                         }
                         resolve(response)
                     })
@@ -48,11 +60,17 @@ export default new Vuex.Store({
                         reject("Invalid credentials!")
                     })
             })
+        },
+        logout({commit}) {
+             commit('logout');
+        },
+        loginStatus({commit}, payload) {
+             commit('setLogin',payload);
         }
     },
     getters: {
-        isLoggedIn: state => state.loginSuccess,
         hasLoginErrored: state => state.loginError,
+        isLoggedIn: state => state.loginStatus,
         getEmail: state => state.email,
         getUserPass: state => state.userPass
     }

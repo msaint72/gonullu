@@ -1,8 +1,5 @@
 <template>
   <div class="user">
-    <h4>Sign Up</h4>
-
-    <h5>Sample database interaction...</h5>
     <div v-if="showResponse">
       <b-alert variant="success" show>User created with Id: {{ user.userId }}</b-alert>
     </div>
