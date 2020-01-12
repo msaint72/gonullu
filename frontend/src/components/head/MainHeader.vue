@@ -50,5 +50,9 @@
   .logout{
       font-weight: bold;
       color: #2c3e50;
+      cursor: pointer;
+  }
+  .logout:hover {
+      text-decoration: underline;
   }
 </style>
