@@ -7,8 +7,8 @@
       <b-alert variant="success" show> {{ error }}</b-alert>
     </div>
     <b-container>
-      <b-form-row class="text-sm-right">
-        <b-col sm="4">
+      <b-form-row>
+        <b-col sm="4" class="text-sm-right" align-self="center">
           <label>Firstname :</label>
         </b-col>
         <b-col  sm="6">
@@ -17,45 +17,45 @@
         </b-col>
       </b-form-row>
       <b-form-row>
-        <b-col sm="4" class="text-sm-right">
+        <b-col sm="4" class="text-sm-right" align-self="center">
           <label>Lastname :</label>
         </b-col>
         <b-col  sm="6">
           <b-input type="text" v-model="user.lastName" placeholder="last name" class="form-control" :class="{ 'is-invalid': submitted && $v.user.lastName.$error }" ></b-input>
-          <div v-if="submitted && !$v.user.lastName.required" class="invalid-feedback">Last Name is required</div>
+          <div v-if="submitted && !$v.user.lastName.required" class="invalid-feedback text-left">Last Name is required</div>
         </b-col>
       </b-form-row>
       <b-form-row>
-        <b-col sm="4" class="text-sm-right">
+        <b-col sm="4" class="text-sm-right" align-self="center">
           <label>Email :</label>
         </b-col>
         <b-col  sm="6">
           <b-input  type="text" v-model="user.email" placeholder="email" class="form-control" :class="{ 'is-invalid': submitted && $v.user.email.$error }" ></b-input>
-          <div v-if="submitted && $v.user.email.$error" class="invalid-feedback"  >
+          <div v-if="submitted && $v.user.email.$error" class="invalid-feedback text-left"  >
             <span v-if="!$v.user.email.required">Email is required</span>
             <span v-if="!$v.user.email.email">Email is invalid</span>
           </div>
         </b-col>
       </b-form-row>
       <b-form-row>
-        <b-col sm="4" class="text-sm-right">
+        <b-col sm="4" class="text-sm-right" align-self="center">
           <label>Password :</label>
         </b-col>
         <b-col  sm="6">
           <b-input type="password" v-model="user.password" placeholder="password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.password.$error }"></b-input>
-          <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+          <div v-if="submitted && $v.user.password.$error" class="invalid-feedback text-left">
             <span v-if="!$v.user.password.required">Password is required</span>
             <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
           </div>
         </b-col>
       </b-form-row>
       <b-form-row>
-        <b-col sm="4" class="text-sm-right">
+        <b-col sm="4" class="text-sm-right" align-self="center">
           <label>Confirm Password :</label>
         </b-col>
         <b-col  sm="6">
           <b-input type="password" v-model="user.confirmPassword" placeholder="confirm password" class="form-control" :class="{ 'is-invalid': submitted && $v.user.confirmPassword.$error }"></b-input>
-          <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback">
+          <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback text-left">
             <span v-if="!$v.user.confirmPassword.required">Password is required</span>
             <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
           </div>
