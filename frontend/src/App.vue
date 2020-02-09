@@ -2,9 +2,11 @@
   <div id="app">
     <main-header></main-header>
     <div class="main-body">
+      <separator>
       <transition name="component-fade" mode="out-in">
         <router-view :hellomsg="msg"></router-view>
       </transition>
+      </separator>
     </div>
     <main-footer></main-footer>
   </div>
@@ -13,9 +15,11 @@
 <script>
 import MainHeader from './components/head/MainHeader.vue'
 import MainFooter from './components/foot/MainFooter.vue'
+import Separator from './components/Separator.vue'
+
 export default {
   name: 'app',
-  components: { MainHeader,MainFooter } ,
+  components: { MainHeader,MainFooter ,Separator} ,
   data () {
     return {
       msg: 'Welcome to Volunteer Mark Demo Application'
@@ -34,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

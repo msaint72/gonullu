@@ -1,6 +1,6 @@
 <template>
  <div id="footer">
-     <seperator>
+     <separator>
          <div class="container">
              <div class="row" style="overflow: hidden;">
                  <div class="col-xs-6  col-sm-4 ">
@@ -49,15 +49,15 @@
                  </div>
              </div>
          </div>
-     </seperator>
+     </separator>
      </div>
 </template>
 
 <script>
-    import Seperator from '../Separator.vue'
+    import Separator from '../Separator.vue'
 export default {
   name: 'MainFooter',
-    components: {Seperator}
+    components: {Separator}
 }
 
 </script>

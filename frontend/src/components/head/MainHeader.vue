@@ -1,4 +1,5 @@
 <template>
+    <div id="header">
      <div v-if="this.isLoggedIn">
          <b-navbar toggleable="lg" type="dark" variant="success">
              <b-navbar-brand to="/">Volunteer</b-navbar-brand>
@@ -23,6 +24,7 @@
          <router-link :to="this.PATHS.USER_PAGE">SignUp</router-link> |
          <router-link :to="this.PATHS.LOGIN">Login</router-link>
      </div>
+</div>
 </template>
 
 <script>
@@ -53,6 +55,13 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-
+    #header {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 20px;
+    }
 
 </style>

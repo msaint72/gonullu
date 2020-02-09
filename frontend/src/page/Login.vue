@@ -1,4 +1,5 @@
 <template>
+
 <div>
   <div class="unprotected" v-if="loginError">
     <h3><b-badge variant="danger">wrong password ?</b-badge></h3>
@@ -17,7 +18,7 @@
     </b-container>
   </div>
 </div>
-</template>
+  </template>
 
 <script>
 export default {
