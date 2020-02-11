@@ -1,10 +1,6 @@
 <template>
 
-<div>
-  <div class="unprotected" v-if="loginError">
-    <h3><b-badge variant="danger">wrong password ?</b-badge></h3>
-    <h5>try to remember that... </h5>
-  </div>
+<div id="login">
   <div class="unprotected">
     <b-container>
       <form @submit.prevent="callLogin()">
@@ -49,3 +45,13 @@ export default {
   }
 }
 </script>
+<style>
+  #login {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+  }
+</style>
