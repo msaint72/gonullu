@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from './components/backend-api'
+import api from '../backend-service/backend-api'
 
 Vue.use(Vuex);
 
@@ -8,14 +8,21 @@ export default new Vuex.Store({
     state: {
         loginStatus: false,
         loginError: false,
-        email: null,
-        userPass: null
+        user:{
+            email: null,
+            firstName:null,
+            lastName: null,
+            username:null,
+            userPass: null
+        }
     },
     mutations: {
         login_success(state, payload){
             state.loginStatus = true;
-            state.email = payload.email;
-            state.userPass = payload.userPass;
+            state.user.email = payload.email;
+            state.user.userPass = payload.userPass;
+            state.user.firstName = payload.firstName;
+            state.user.lastName = payload.lastName;
             localStorage.setItem('isLoggedIn', 'true')
         },
         login_error(state, payload){

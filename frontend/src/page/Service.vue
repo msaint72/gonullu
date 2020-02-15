@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import api from "../components/backend-api";
+  import api from "../backend-service/backend-api";
 
   export default {
     name: 'service',

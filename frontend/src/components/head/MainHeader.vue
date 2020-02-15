@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex';
+    import {mapGetters} from 'vuex';
     import { URL_PATH} from "../../UrlMappings";
 
     export default {

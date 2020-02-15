@@ -27,8 +27,7 @@
 
           <b-form-group
                   id="input-group-2"
-                  label-for="input-1"
-              >
+                  label-for="input-1">
 
           <b-input-group   id="input-group-2">
             <b-form-input    placeholder="Enter first name"></b-form-input>
