@@ -14,6 +14,7 @@
                     <b-nav-item-dropdown text="User" right>
                         <b-dropdown-item><span  class="logout" v-on:click="this.logout">Logout</span></b-dropdown-item>
                         <b-dropdown-item :to="this.PATHS.PROFILE">Profile</b-dropdown-item>
+                        <b-dropdown-item :to="this.PATHS.MANAGE_ORG">Manage Organization</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>

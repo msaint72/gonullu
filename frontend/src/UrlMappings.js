@@ -4,6 +4,7 @@ import User from '@/page/User'
 import Login from '@/page/Login'
 import Protected from '@/page/Protected'
 import Profile from '@/page/Profile'
+import Organization from '@/page/Organization'
 
 // uris without hashes #, see https://router.vuejs.org/guide/essentials/history-mode.html#html5-history-mode
 const PATHS = {
@@ -13,6 +14,7 @@ const PATHS = {
     LOGIN : '/login',
     PROTECTED : '/protected',
     PROFILE : '/profile',
+    MANAGE_ORG : '/organization',
 }
 const routes =  [
     { path: PATHS.HOME, component: Home },
@@ -20,6 +22,7 @@ const routes =  [
     { path: PATHS.USER_PAGE, component: User },
     { path: PATHS.LOGIN, component: Login },
     { path: PATHS.PROFILE, component: Profile },
+    { path: PATHS.MANAGE_ORG, component: Organization },
     {
         path: '/protected',
         component: Protected,
