@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  name: 'Separator',
-  props: { hellomsg: { type: String, required: true } }
-}
+  name: 'Separator'}
 
 </script>
 
