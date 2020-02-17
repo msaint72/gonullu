@@ -20,10 +20,7 @@ public class BackendController {
     private static final Logger LOG = LoggerFactory.getLogger(BackendController.class);
 
     public static final String HELLO_TEXT = "Hello from Gonullu Project Backend!";
-    public static final String SECURED_TEXT = "Hello from the secured resource!";
 
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private OrganizationRepository organizationRepository;
 
@@ -62,18 +59,7 @@ public class BackendController {
         }).orElseThrow(() -> new OrganizationNotFoundException("The organization with the id " + id + " couldn't be found in the database."));
     }
 
-    @RequestMapping(path="/secured", method = RequestMethod.GET)
-    public @ResponseBody String getSecured() {
-        LOG.info("GET successfully called on /secured resource");
-        return SECURED_TEXT;
-    }
 
-    // Forwards all routes to FrontEnd except: '/', '/index.html', '/api', '/api/**'
-    // Required because of 'mode: history' usage in frontend routing, see README for further details
-    @RequestMapping(value = "{_:^(?!index\\.html|api).$}")
-    public String redirectApi() {
-        LOG.info("URL entered directly into the Browser, so we need to redirect...");
-        return "forward:/";
-    }
+
 
 }
