@@ -75,7 +75,7 @@
 </template>
 
 <script>
-  import api from "../backend-service/backend-api";
+  import userApi from "../backend-service/user-api";
   import { required, email, minLength, sameAs }  from 'vuelidate/lib/validators'
   export default {
     name: 'SignUp',
@@ -119,7 +119,7 @@
         if (this.$v.$invalid) {
           return;
         }
-        api.createUser(this.user.firstName,
+        userApi.createUser(this.user.firstName,
                       this.user.lastName,
                       this.user.email,
                       this.user.password).then(response => {
