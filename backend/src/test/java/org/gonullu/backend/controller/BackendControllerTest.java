@@ -104,7 +104,7 @@ public class BackendControllerTest {
 		.then()
 			.statusCode(HttpStatus.SC_OK)
 			.assertThat()
-				.body(is(equalTo(BackendController.SECURED_TEXT)));
+				.body(is(equalTo(LoginController.SECURED_TEXT)));
 	}
 
 }

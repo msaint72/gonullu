@@ -75,7 +75,7 @@
 </template>
 
 <script>
-  import api from "../components/backend-api";
+  import api from "../backend-service/backend-api";
   import { required, email, minLength, sameAs }  from 'vuelidate/lib/validators'
   export default {
     name: 'SignUp',

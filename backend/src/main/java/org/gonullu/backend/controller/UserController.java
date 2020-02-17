@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path="/api/user")
 public class UserController {
+
     @Autowired
     UserService userService;
 
@@ -20,6 +21,18 @@ public class UserController {
 
         UserDto userDto=userService.getUserByUserId(userId);
         BeanUtils.copyProperties(userDto,returnValue);
+        return  returnValue;
+    }
+
+    @PostMapping
+    public UserRest userSignUp(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
+        UserRest returnValue=new UserRest();
+
+        UserDto userDto=new UserDto();
+        BeanUtils.copyProperties(userDetails,userDto);
+
+        UserDto createdUser=userService.createUser(userDto);
+        BeanUtils.copyProperties(createdUser,returnValue);
         return  returnValue;
     }
 }

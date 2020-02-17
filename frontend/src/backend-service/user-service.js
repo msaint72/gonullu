@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios/index'
 
 const AXIOS = axios.create({
   baseURL: `/api`,
@@ -7,9 +7,6 @@ const AXIOS = axios.create({
 
 
 export default {
-    hello() {
-        return AXIOS.get(`/hello`);
-    },
     getUser(userId) {
         return AXIOS.get(`/user/` + userId);
     },

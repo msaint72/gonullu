@@ -1,6 +1,6 @@
 import Home from '@/page/Home'
 import Service from '@/page/Service'
-import User from '@/page/User'
+import SignUp from '@/page/SignUp'
 import Login from '@/page/Login'
 import Protected from '@/page/Protected'
 import Profile from '@/page/Profile'
@@ -10,7 +10,7 @@ import Organization from '@/page/Organization'
 const PATHS = {
     HOME : '/',
     SERVICE : '/callservice',
-    USER_PAGE : '/user',
+    USER_PAGE : '/signUp',
     LOGIN : '/login',
     PROTECTED : '/protected',
     PROFILE : '/profile',
@@ -19,7 +19,7 @@ const PATHS = {
 const routes =  [
     { path: PATHS.HOME, component: Home },
     { path: PATHS.SERVICE, component: Service },
-    { path: PATHS.USER_PAGE, component: User },
+    { path: PATHS.USER_PAGE, component: SignUp },
     { path: PATHS.LOGIN, component: Login },
     { path: PATHS.PROFILE, component: Profile },
     { path: PATHS.MANAGE_ORG, component: Organization },
