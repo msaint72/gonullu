@@ -21,6 +21,10 @@ public class UserController {
 
         UserDto userDto=userService.getUserByUserId(userId);
         BeanUtils.copyProperties(userDto,returnValue);
+        if(userDto.getAdminOf()!=null){
+            returnValue.setOrgId(userDto.getAdminOf().getId());
+            returnValue.setOrgName(userDto.getAdminOf().getName());
+        }
         return  returnValue;
     }
 

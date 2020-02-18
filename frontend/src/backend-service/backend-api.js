@@ -15,6 +15,10 @@ export default {
                 email: email,
                 password: password
             });
+    },
+    getUser(user) {
+        console.log(user);
+        return AXIOS.get(`/user/` + user.userId, { headers: { Authorization: user.token } });
     }
 }
 

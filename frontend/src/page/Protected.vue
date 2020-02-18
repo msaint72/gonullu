@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1><b-badge variant="success">YEAH you made it!</b-badge></h1>
-    <h5>If you're able to read this, you've successfully logged in and redirected to this protected site :)</h5>
 
     <b-btn variant="primary" @click="getSecuredTextFromBackend()">Call the secured API</b-btn>
     <p></p>
+
+    <div v-if="user">
+      <h1><b-badge variant="success">  {{ user.firstName+ ' '+ user.lastName }}</b-badge></h1>
+    </div>
+
+    <div v-if="user.orgName">
+      <b-badge variant="success">Organization:</b-badge>  {{ user.orgName + '(' +user.orgId+')' }}
+    </div>
 
     <div v-if="securedApiCallSuccess">
       <b-badge variant="success">API call</b-badge> Full response: {{ backendResponse }} <b-badge variant="success">successful</b-badge>
@@ -22,13 +28,25 @@
 
 export default {
   name: 'protected',
-
   data () {
     return {
       backendResponse: '',
       securedApiCallSuccess: false,
       errors: null
     }
+  },
+  computed:{
+    userId(){
+      return this.$store.getters.userId;
+    },
+    user(){
+      return this.$store.getters.user;
+    }
+  },
+  created(){
+    this.$store.dispatch('getUserData',
+            { userId:this.$store.getters.userId,
+              token:this.$store.getters.token} )
   },
   methods: {
     getSecuredTextFromBackend() {
@@ -43,7 +61,7 @@ export default {
                 this.errors = error;
               })
     }
-  }
+  },
 }
 
 </script>

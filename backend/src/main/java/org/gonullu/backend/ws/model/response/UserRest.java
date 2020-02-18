@@ -5,6 +5,8 @@ public class UserRest {
     private String firstName;
     private String lastName;
     private String email;
+    private String orgName;
+    private long orgId;
 
     public String getUserId() {
         return userId;
@@ -37,4 +39,12 @@ public class UserRest {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getOrgName() { return orgName; }
+
+    public void setOrgName(String orgName) {this.orgName = orgName;}
+
+    public long getOrgId() {return orgId;}
+
+    public void setOrgId(long orgId) {this.orgId = orgId;}
 }

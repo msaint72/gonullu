@@ -6,23 +6,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        idToken:null,
         loginStatus: false,
         loginError: false,
         user:{
+            userId: null,
             email: null,
             firstName:null,
             lastName: null,
+            orgName:null,
+            orgId:null,
             username:null,
             userPass: null
+        },
+        organization:{
+            id:null,
+            name:null
         }
     },
     mutations: {
-        login_success(state, payload){
+        login_success(state, userData){
             state.loginStatus = true;
-            state.user.email = payload.email;
-            state.user.userPass = payload.userPass;
-            state.user.firstName = payload.firstName;
-            state.user.lastName = payload.lastName;
+            state.user.userId=userData.userId;
+            state.user.email = userData.email;
+            state.idToken=userData.token;
             localStorage.setItem('isLoggedIn', 'true')
         },
         login_error(state, payload){
@@ -38,23 +45,29 @@ export default new Vuex.Store({
         setLogin(state,payload){
             state.loginStatus = payload == 'true' ? true : false;
         },
+        setUserInfo(state,userData){
+            state.user.firstName=userData.firstName;
+            state.user.lastName=userData.lastName;
+            state.user.orgName=userData.orgName;
+            state.user.orgId=userData.orgId;
+        }
 
     },
     actions: {
-        login({commit}, {email, password}) {
+        login({commit,dispatch}, {email, password}) {
             return new Promise((resolve, reject) => {
                 console.log("Accessing backend with email: '" + email);
                 api.getSecured(email, password)
                     .then(response => {
                         console.log("Response: '" + response.data + "' with Statuscode " + response.status);
                         if(response.status == 200) {
-                            console.log("Login successful");
+                            console.log("Login successful userId:"+response.headers.userid);
                             // place the loginSuccess state into our vuex store
                             commit('login_success', {
                                 email: email,
-                                userPass: password
+                                token:response.headers.authorization,
+                                userId:response.headers.userid
                             });
-
                         }
                         resolve(response)
                     })
@@ -73,12 +86,30 @@ export default new Vuex.Store({
         },
         loginStatus({commit}, payload) {
              commit('setLogin',payload);
+        },
+        getUserData({commit,state},userData){
+            console.log("getting user data for:"+userData.userId);
+           // if(!state.user.firstName){
+           //     return;
+            //}
+            api.getUser(userData)
+                .then(response=>{
+                    console.log(response);
+                    if(response.status == 200) {
+                        commit('setUserInfo',response.data);
+                    }
+            })
+                .catch(error => {
+                        console.log("Error: " + error);
+                });
         }
     },
     getters: {
         hasLoginErrored: state => state.loginError,
         isLoggedIn: state => state.loginStatus,
-        getEmail: state => state.email,
-        getUserPass: state => state.userPass
+        getEmail: state => state.user.email,
+        userId:state=>state.user.userId,
+        token:state=>state.idToken,
+        user: state=>state.user
     }
 })

@@ -1,5 +1,7 @@
 package org.gonullu.backend.ws.shared.dto;
 
+import org.gonullu.backend.domain.Organization;
+
 import java.io.Serializable;
 
 public class UserDto implements Serializable {
@@ -11,6 +13,15 @@ public class UserDto implements Serializable {
     private String email;
     private String password;
     private String encryptedPassword;
+    private Organization adminOf;
+
+    public Organization getAdminOf() {
+        return adminOf;
+    }
+
+    public void setAdminOf(Organization adminOf) {
+        this.adminOf = adminOf;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
