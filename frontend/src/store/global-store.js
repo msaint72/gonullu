@@ -38,8 +38,10 @@ export default new Vuex.Store({
         },
         logout(state){
             state.loginStatus = false;
-            state.userPass =null;
-            state.email = null;
+            state.user.userId=null;
+            state.user.firstName=null;
+            state.user.lastName=null;
+            state.user.email=null;
             localStorage.setItem('isLoggedIn', 'false')
         },
         setLogin(state,payload){
@@ -89,9 +91,10 @@ export default new Vuex.Store({
         },
         getUserData({commit,state},userData){
             console.log("getting user data for:"+userData.userId);
-           // if(!state.user.firstName){
-           //     return;
-            //}
+            console.log("Name:"+state.user.firstName);
+            if(state.user.firstName!=null){
+                return;
+            }
             api.getUser(userData)
                 .then(response=>{
                     console.log(response);

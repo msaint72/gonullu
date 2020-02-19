@@ -14,7 +14,7 @@
                     <b-nav-item-dropdown text="User" right>
                         <b-dropdown-item><span  class="logout" v-on:click="this.logout">Logout</span></b-dropdown-item>
                         <b-dropdown-item :to="this.PATHS.PROFILE">Profile</b-dropdown-item>
-                        <b-dropdown-item :to="this.PATHS.MANAGE_ORG">Manage Organization</b-dropdown-item>
+                        <b-dropdown-item v-if="this.orgAdmin" :to="this.PATHS.MANAGE_ORG">Manage Organization</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -31,12 +31,17 @@
 <script>
     import {mapGetters} from 'vuex';
     import { URL_PATH} from "../../UrlMappings";
+    import api from '../../backend-service/backend-api'
+    import store from '../../store/global-store'
 
     export default {
 
         name: 'MainHeader',
         computed: {
-            ...mapGetters(['isLoggedIn'])
+            ...mapGetters(['isLoggedIn']),
+            orgAdmin(){
+                return this.$store.getters.user.orgName!=null;
+            }
         },
         data () {
             return {
@@ -47,6 +52,13 @@
             logout() {
                 this.$store.dispatch("logout")
                 this.$router.push('/')
+            }
+        },
+        created(){
+            if(this.isLoggedIn){
+                this.$store.dispatch('getUserData',
+                    { userId:this.$store.getters.userId,
+                        token:this.$store.getters.token} )
             }
         }
     }
