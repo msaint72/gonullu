@@ -40,7 +40,7 @@ public class Organization {
 
     // primary user
     // other users
-    protected Organization(){}
+    public Organization(){}
 
     public long getId() {
         return id;

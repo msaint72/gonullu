@@ -21,72 +21,13 @@
                     </b-form-group>
 
                     <b-form-group
-                            description="Organization Causes">
-                        <b-form-tags
-                                v-model="form.causes"
-                                placeholder="Enter organization causes"
-                                no-add-on-enter
-                                class="mb-2"
-                        ></b-form-tags>
-                    </b-form-group>
-
-                    <b-form-group
                             description="Organization description">
                         <b-form-textarea
                                 rows="3"
                                 max-rows="6"
-                                v-model="form.description"
+                                v-model="form.summary"
                                 placeholder="Enter organization description"
                         ></b-form-textarea>
-                    </b-form-group>
-                    <b-form-group
-                            label-size="lg"
-                            label="Address">
-                        <b-form-group  description="Address">
-                            <b-form-input
-                                    id="input-4"
-                                    v-model="form.address"
-                                    required
-                                    placeholder="Enter organization address"
-                            ></b-form-input>
-
-                        </b-form-group>
-                        <b-form-group  description="Province">
-                            <b-form-select v-model="form.province" :options="provinces" size="sm" class="mt-3"></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group  description="District">
-                            <b-form-select v-model="form.district" :options="districts" size="sm" class="mt-3"></b-form-select>
-                        </b-form-group>
-
-                        <b-form-group  description="Zipcode">
-                            <b-form-input
-                                    id="zipcode"
-                                    v-model="form.zipcode"
-                                    type="text"
-                                    required
-                                    placeholder="Enter zipcode"
-                            ></b-form-input>
-                        </b-form-group>
-                    </b-form-group>
-
-                    <b-form-group  description="Phone">
-                            <b-form-input
-                                id="tel"
-                                v-model="form.tel"
-                                type="tel"
-                                required
-                                placeholder="Enter phone number"
-                        ></b-form-input>
-                    </b-form-group>
-                    <b-form-group  description="Web address">
-                        <b-form-input
-                                id="url"
-                                v-model="form.url"
-                                type="url"
-                                required
-                                placeholder="Enter web site address"
-                        ></b-form-input>
                     </b-form-group>
                     <b-button type="submit" @click.prevent="submit">Save</b-button>
                 </b-form>
@@ -96,19 +37,21 @@
 </template>
 <script>
 
+    import {mapGetters,mapActions} from 'vuex';
     export default {
-        data() {
+
+    data() {
             return {
                 form: {
                     name: '',
                     causes: [],
-                    description:'',
+                    summary:'',
                     address: '',
                     province:'',
                     district:'',
                     zipcode:'',
-                    tel:'',
-                    url:'',
+                    phone:'',
+                    web:'',
                     checked: []
                 },
                 show: true,
@@ -116,9 +59,33 @@
                 districts: [{ text: 'Select District', value: null }, 'Çankaya', 'Keçiören', 'Yenimahalle'],
             }
         },
+        computed :{
+            ...mapGetters(['user','organization']),
+        },
+        created(){
+            console.log("getting org with id:"+this.user.orgId);
+
+            this.$store.dispatch('getOrgData',
+                { id:this.user.orgId,
+                token:this.$store.getters.token} )
+                .then(()=>{
+                    this.form.name=this.organization.name
+                    this.form.summary=this.organization.summary;
+            });
+        },
+        mounted: function(){
+        },
         methods: {
+        ...mapActions(['saveOrganization']),
             submit(){
-                console.log(this.form);
+                console.log(this.organization);
+                console.log(this.$store.getters.token);
+                this.saveOrganization(
+                        { organization: {
+                                id : this.organization.id,
+                                name : this.form.name,
+                                summary: this.form.summary
+                            }, token:this.$store.getters.token});
             }
         }
     }

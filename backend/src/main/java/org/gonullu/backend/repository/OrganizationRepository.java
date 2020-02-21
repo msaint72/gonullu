@@ -1,7 +1,10 @@
 package org.gonullu.backend.repository;
 
 import org.gonullu.backend.domain.Organization;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrganizationRepository extends JpaRepository<Organization,Long> {
+import java.util.Optional;
+
+public interface OrganizationRepository extends CrudRepository<Organization,Long> {
+    Optional<Organization> findById(Long id);
 }
