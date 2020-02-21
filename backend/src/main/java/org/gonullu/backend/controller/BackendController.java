@@ -50,7 +50,7 @@ public class BackendController {
     }
 */
 
-    @GetMapping(path = "/organization/{id}")
+  /*  @GetMapping(path = "/organization/{id}")
     public Organization getOrganizationById(@PathVariable("id") long id) {
 
         return organizationRepository.findById(id).map(org -> {
@@ -58,7 +58,7 @@ public class BackendController {
             return org;
         }).orElseThrow(() -> new OrganizationNotFoundException("The organization with the id " + id + " couldn't be found in the database."));
     }
-
+*/
 
 
 
