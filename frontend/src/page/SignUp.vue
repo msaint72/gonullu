@@ -77,6 +77,9 @@
 <script>
   import userApi from "../backend-service/user-api";
   import { required, email, minLength, sameAs }  from 'vuelidate/lib/validators'
+  import {mapActions, mapGetters, mapState} from 'vuex';
+
+
   export default {
     name: 'SignUp',
 
@@ -112,6 +115,7 @@
       }
     },
     methods: {
+
       // Fetches posts when the component is created.
       createNewUser () {
         this.submitted=true;

@@ -18,7 +18,7 @@
                   description="We'll never share your email with anyone else.">
             <b-form-input
                     id="input-1"
-                    v-model="form.email"
+                    v-model="user.email"
                     type="email"
                     required
                     placeholder="Enter email"
@@ -30,15 +30,15 @@
                   label-for="input-1">
 
           <b-input-group   id="input-group-2">
-            <b-form-input    placeholder="Enter first name"></b-form-input>
-            <b-form-input    placeholder="Enter last name"></b-form-input>
+            <b-form-input   v-model="user.name"  placeholder="Enter first name"></b-form-input>
+            <b-form-input   v-model="user.surname"  placeholder="Enter last name"></b-form-input>
           </b-input-group>
           </b-form-group>
 
           <b-form-group id="input-group-2" label-for="input-2">
             <b-form-input
                     id="input-2"
-                    v-model="form.username"
+                    v-model="user.username"
                     required
                     placeholder="Enter username"
             ></b-form-input>
@@ -47,7 +47,7 @@
           <b-form-group id="input-group-3" label-for="input-3">
             <b-form-input
                     id="input-3"
-                    v-model="form.address"
+                    v-model="user.address"
                     required
                     placeholder="Enter your address information"
             ></b-form-input>
@@ -60,25 +60,29 @@
   </b-container>
 </template>
 <script>
-
+  import {mapActions, mapGetters, mapState} from 'vuex';
 export default {
   name: 'protected',
   data() {
     return {
-      form: {
+      user: {
         email: '',
         name: '',
         surname: '',
         username: '',
-        address: '',
-        checked: []
-      },
-      foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-      show: true
+        address: ''
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['getUser'])
   },
   methods: {
 
+  },
+
+  mounted() {
+    this.user=this.getUser;
   }
 }
 
