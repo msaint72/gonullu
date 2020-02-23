@@ -1,8 +1,7 @@
 import axios from 'axios/index'
 
 const AXIOS = axios.create({
-  baseURL: `/api`,
-  timeout: 3000
+  baseURL: `/api`
 });
 
 

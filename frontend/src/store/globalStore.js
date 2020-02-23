@@ -27,6 +27,8 @@ export default {
             state.user.userId=userData.userId;
             state.user.email = userData.email;
             state.idToken=userData.token;
+            state.user.firstName=userData.firstName;
+            state.user.surname=userData.surName;
             localStorage.setItem('isLoggedIn', 'true')
         },
         login_error(state, payload){
@@ -64,7 +66,9 @@ export default {
                             commit('login_success', {
                                 email: email,
                                 token:response.headers.authorization,
-                                userId:response.headers.userid
+                                userId:response.headers.userid,
+                                firstName:response.headers.firstName,
+                                lastName:response.headers.lastName
                             });
                         }
                         resolve(response)

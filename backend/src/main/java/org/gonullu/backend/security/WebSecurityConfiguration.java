@@ -30,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/hello").authenticated()
                 .antMatchers("/h2-console/**").permitAll()
               //  .antMatchers("/api/user/**").permitAll() // allow every URI, that begins with '/api/user/'
-                .antMatchers("/api/secured").authenticated()
+                .antMatchers("/api/login**").authenticated()
                 .anyRequest().authenticated() // protect all other requests
         .and()
             .csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL PUT, POST, DELETE will get HTTP 403!
@@ -50,7 +50,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public AuthenticationFilter getAuthenticationFilter() throws Exception{
         final AuthenticationFilter filter=new AuthenticationFilter(authenticationManager(),userService);
-        filter.setFilterProcessesUrl("/api/secured/");
+        filter.setFilterProcessesUrl("/api/login");
         return filter;
     }
 }

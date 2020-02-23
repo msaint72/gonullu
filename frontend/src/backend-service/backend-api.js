@@ -1,24 +1,23 @@
 import axios from 'axios/index'
 
 const AXIOS = axios.create({
-  baseURL: `/api`,
-  timeout: 3000
+  baseURL: `/api`
 });
 
 
 export default {
-    hello() {
-        return AXIOS.get(`/hello`);
+    hello(user) {
+        return AXIOS.get(`/hello`,{ headers: { Authorization: user.token } });
     },
     getSecured(email, password) {
-        return AXIOS.post(`/secured/`,{
+        return AXIOS.post(`/login`,{
                 email: email,
                 password: password
             });
     },
     getUser(user) {
-        console.log(user);
-        return AXIOS.get(`/user/` + user.userId, { headers: { Authorization: user.token } });
+        console.log();
+        return AXIOS.get(`/user/` + user.userId);
     },
     getOrganization(user) {
         console.log(user);

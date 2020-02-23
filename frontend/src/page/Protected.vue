@@ -25,6 +25,7 @@
 <script>
   import api from '../backend-service/backend-api'
   import store from '../store/globalStore'
+  import {mapGetters,mapActions} from 'vuex';
 
 export default {
   name: 'protected',
@@ -36,6 +37,7 @@ export default {
     }
   },
   computed:{
+    ...mapGetters(['user']),
     userId(){
       return this.$store.getters.userId;
     },

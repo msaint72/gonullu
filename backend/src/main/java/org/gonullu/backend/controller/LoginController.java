@@ -10,9 +10,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-@RestController()
+@RestController
 public class LoginController {
 
     @Autowired
@@ -21,9 +22,8 @@ public class LoginController {
     private static final Logger LOG = LoggerFactory.getLogger(BackendController.class);
     public static final String SECURED_TEXT = "Hello from the secured resource!";
 
-    @RequestMapping(path="/login", method = RequestMethod.GET)
+    @PostMapping(path="/api/login")
     public @ResponseBody String getSecured() {
-        LOG.info("GET successfully called on /secured resource");
         return SECURED_TEXT;
     }
 

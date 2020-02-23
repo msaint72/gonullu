@@ -24,7 +24,7 @@
       }
     },
     computed: {
-      ...mapGetters(['user','organization']),
+      ...mapGetters(['user'])
 
     },
     methods: {

@@ -65,7 +65,7 @@ export default {
   name: 'protected',
   data() {
     return {
-      user: {
+      formUser: {
         email: '',
         name: '',
         surname: '',
@@ -75,14 +75,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapGetters(['user'])
   },
   methods: {
 
   },
-
   mounted() {
-    this.user=this.getUser;
+    this.formUser=this.user;
   }
 }
 

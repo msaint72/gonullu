@@ -77,7 +77,7 @@
         mounted: function(){
         },
         methods: {
-        ...mapActions(['saveOrganization']),
+        ...mapActions('organizationStore', ['saveOrganization']),
             submit(){
                 console.log(this.organization);
                 console.log(this.$store.getters.token);
