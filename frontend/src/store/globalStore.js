@@ -4,7 +4,7 @@ import api from '../backend-service/backend-api'
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export default {
     state: {
         idToken:null,
         loginStatus: false,
@@ -19,21 +19,6 @@ export default new Vuex.Store({
             orgId:null,
             username:null,
             userPass: null
-        },
-        organization:{
-            id:null,
-            name:null,
-            summary:null,
-            address:{
-                province:"",
-                district:"",
-                zipcode: "",
-                adress:"",
-
-            },
-            web:null,
-            phone:null,
-            causes:[],
         }
     },
     mutations: {
@@ -64,17 +49,7 @@ export default new Vuex.Store({
             state.user.lastName=userData.lastName;
             state.user.orgName=userData.orgName;
             state.user.orgId=userData.orgId;
-        },
-        setOrgInfo(state,orgData){
-            state.organization.id=orgData.id;
-            state.organization.name=orgData.name;
-            state.organization.address=orgData.address;
-            state.organization.phone=orgData.phone;
-            state.organization.web=orgData.web;
-            state.organization.summary=orgData.summary;
-            state.organization.causes=orgData.causes;
         }
-
     },
     actions: {
         login({commit,dispatch}, {email, password}) {
@@ -126,32 +101,6 @@ export default new Vuex.Store({
                 .catch(error => {
                         console.log("Error: " + error);
                 });
-        },
-        getOrgData({commit,state},userData){
-            console.log("getting organization data for id:"+userData.id);
-            return api.getOrganization(userData)
-                .then(response=>{
-                    console.log(response);
-                    if(response.status ==200){
-                        commit('setOrgInfo',response.data);
-                    }
-                })
-                .catch(error=>{
-                    console.log("Error: " + error);
-                });
-        },
-        saveOrganization({commit,state},payload){
-            console.log("updating organization with id:"+payload.organization.id);
-            api.updateOrganization(payload.organization,payload.token)
-                .then(response=>{
-                    console.log(response);
-                    if(response.status ==200){
-                        commit('setOrgInfo',response.data);
-                    }
-                })
-                .catch(error=>{
-                    console.log("Error: " + error);
-                });
         }
     },
     getters: {
@@ -160,7 +109,6 @@ export default new Vuex.Store({
         getEmail: state => state.user.email,
         userId:state=>state.user.userId,
         token:state=>state.idToken,
-        user: state=>state.user,
-        organization:state=>state.organization
+        user: state=>state.user
     }
-})
+}

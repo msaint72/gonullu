@@ -23,7 +23,7 @@ export default {
     getOrganization(user) {
         console.log(user);
         return AXIOS.get(`/organization/` + user.id, { headers: { Authorization: user.token } });
-    } ,
+    },
     updateOrganization(organization,token) {
         console.log(organization);
         console.log(token);

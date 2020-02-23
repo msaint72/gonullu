@@ -27,7 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No session will be created or used by spring security
         .and()
             .authorizeRequests()
-                .antMatchers("/api/hello").permitAll()
+                .antMatchers("/api/hello").authenticated()
                 .antMatchers("/h2-console/**").permitAll()
               //  .antMatchers("/api/user/**").permitAll() // allow every URI, that begins with '/api/user/'
                 .antMatchers("/api/secured").authenticated()

@@ -22,7 +22,7 @@ export default {
   components: { MainHeader,MainFooter ,Separator} ,
   data () {
     return {
-      msg: 'Welcome to Volunteer Mark Demo Application'
+      msg: 'Welcome to Volunteer Demo Application'
     }
   },
   created() {

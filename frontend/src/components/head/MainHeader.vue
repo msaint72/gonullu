@@ -31,8 +31,6 @@
 <script>
     import {mapGetters} from 'vuex';
     import { URL_PATH} from "../../UrlMappings";
-    import api from '../../backend-service/backend-api'
-    import store from '../../store/global-store'
 
     export default {
 

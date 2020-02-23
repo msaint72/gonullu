@@ -17,5 +17,4 @@ public class SpringBootVuejsApplication {
 		return new BCryptPasswordEncoder();
 	}
 
-
 }

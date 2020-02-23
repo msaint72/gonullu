@@ -1714,7 +1714,7 @@ First we add [the vuex dependency](https://www.npmjs.com/package/vuex) into our 
 
 #### Define the vuex state
 
-To implement them, we create a new [global-store.js](frontend/src/global-store.js) file:
+To implement them, we create a new [globalStore.js](frontend/src/globalStore.js) file:
 
 ```
 import Vue from 'vue'
@@ -1799,7 +1799,7 @@ To be able to access vuex state from within other components, we need to impleme
 
 #### Use vuex Store inside the Login component and forward to Protected.vue, if Login succeeded
 
-Instead of directly calling the auth endpoint via axios inside our Login component, we now want to use our vuex store and its actions instead. Therefore we don't even need to import the [global-store.js](frontend/src/global-store.js) inside our `Login.vue`, we can simply access it through `$store`. Thy is that? Because we already did that inside our [main.js](frontend/src/main.js):
+Instead of directly calling the auth endpoint via axios inside our Login component, we now want to use our vuex store and its actions instead. Therefore we don't even need to import the [globalStore.js](frontend/src/globalStore.js) inside our `Login.vue`, we can simply access it through `$store`. Thy is that? Because we already did that inside our [main.js](frontend/src/main.js):
 
 ```
 import store from './store'
@@ -1906,7 +1906,7 @@ Now if we want to go a step ahead and call a secured API endpoint in the backend
         |  Spring Boot backend                                                  |
         +-----------------------------------------------------------------------+
 
-Therefore we enhance our [global-store.js](frontend/src/global-store.js):
+Therefore we enhance our [globalStore.js](frontend/src/globalStore.js):
 
 ```
 export default new Vuex.Store({

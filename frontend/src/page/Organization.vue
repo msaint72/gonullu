@@ -60,7 +60,8 @@
             }
         },
         computed :{
-            ...mapGetters(['user','organization']),
+            ...mapGetters(['user']),
+            ...mapGetters('organizationStore', ['organization']),
         },
         created(){
             console.log("getting org with id:"+this.user.orgId);

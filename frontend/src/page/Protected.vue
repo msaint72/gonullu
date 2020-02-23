@@ -24,7 +24,7 @@
 
 <script>
   import api from '../backend-service/backend-api'
-  import store from '../store/global-store'
+  import store from '../store/globalStore'
 
 export default {
   name: 'protected',

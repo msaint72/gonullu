@@ -11,6 +11,7 @@
 
 <script>
   import api from "../backend-service/backend-api";
+  import {mapActions, mapGetters, mapState} from 'vuex';
 
   export default {
     name: 'service',
@@ -22,10 +23,14 @@
         errors: []
       }
     },
+    computed: {
+      ...mapGetters(['user','organization']),
+
+    },
     methods: {
       // Fetches posts when the component is created.
       callHelloApi () {
-        api.hello().then(response => {
+        api.hello(this.user).then(response => {
             this.backendResponse = response.data;
             console.log(response.data)
         })
@@ -37,8 +42,6 @@
   }
 
 </script>
-
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h1, h2 ,h3{

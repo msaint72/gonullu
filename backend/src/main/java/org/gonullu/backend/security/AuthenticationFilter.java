@@ -26,8 +26,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
 
-
-
     public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService){
         this.authenticationManager=authenticationManager;
         this.userService=userService;
@@ -66,6 +64,5 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         servletResponse.addHeader(SecurityConstants.HEADER_STRING,SecurityConstants.TOKEN_PREFIX+token);
         servletResponse.addHeader("UserID",userDto.getUserId());
-
     }
 }

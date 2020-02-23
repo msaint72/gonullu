@@ -5,7 +5,7 @@ import { BootstrapVue, IconsPlugin  } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import store from './store/global-store'
+import store from './store/store'
 
 import Vuelidate from 'vuelidate';
 
