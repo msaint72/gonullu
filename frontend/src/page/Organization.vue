@@ -29,6 +29,24 @@
                                 placeholder="Enter organization description"
                         ></b-form-textarea>
                     </b-form-group>
+                    <b-form-group  description="Phone">
+                        <b-form-input
+                                id="tel"
+                                v-model="form.phone"
+                                type="tel"
+                                required
+                                placeholder="Enter phone number"
+                        ></b-form-input>
+                    </b-form-group>
+                    <b-form-group  description="Web address">
+                        <b-form-input
+                                id="url"
+                                v-model="form.web"
+                                type="url"
+                                required
+                                placeholder="Enter web site address"
+                        ></b-form-input>
+                    </b-form-group>
                     <b-button type="submit" @click.prevent="submit">Save</b-button>
                 </b-form>
             </b-col>
@@ -76,7 +94,9 @@
                     token:this.$store.getters.token} )
                     .then(()=>{
                         this.form.name=this.organization.name
-                        this.form.summary=this.organization.summary;
+                        this.form.summary=this.organization.summary,
+                        this.form.phone=this.organization.phone,
+                        this.form.web=this.organization.web;
                     });
             },
             submit(){
@@ -86,7 +106,9 @@
                         { organization: {
                                 id : this.organization.id,
                                 name : this.form.name,
-                                summary: this.form.summary
+                                summary: this.form.summary,
+                                phone: this.form.phone,
+                                web:this.form.web
                             }, token:this.$store.getters.token});
             }
         }

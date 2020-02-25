@@ -31,6 +31,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         if(!organization.isPresent()) throw new OrganizationNotFoundException("Organization not found:"+id);
         organization.get().setName(organizationDto.getName());
         organization.get().setSummary(organizationDto.getSummary());
+        organization.get().setWeb(organizationDto.getWeb());
+        organization.get().setPhone(organizationDto.getPhone());
         Organization updatedOrganization=organizationRepository.save(organization.get());
 
         OrganizationDto returnValue=new OrganizationDto();

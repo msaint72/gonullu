@@ -28,7 +28,9 @@ export default {
         console.log(token);
         return AXIOS.put(`/organization/`+organization.id,
             { name:organization.name,
-                    summary:organization.summary},
+                    summary:organization.summary,
+                    phone:organization.phone,
+                    web:organization.web},
             { headers: { Authorization: token } }
             );
     }
