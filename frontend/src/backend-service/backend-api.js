@@ -17,7 +17,7 @@ export default {
     },
     getUser(user) {
         console.log();
-        return AXIOS.get(`/user/` + user.userId);
+        return AXIOS.get(`/user/` + user.userId,{ headers: { Authorization: user.token } });
     },
     getOrganization(user) {
         console.log(user);

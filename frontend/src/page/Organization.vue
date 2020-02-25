@@ -65,19 +65,20 @@
         },
         created(){
             console.log("getting org with id:"+this.user.orgId);
-
-            this.$store.dispatch('getOrgData',
-                { id:this.user.orgId,
-                token:this.$store.getters.token} )
-                .then(()=>{
-                    this.form.name=this.organization.name
-                    this.form.summary=this.organization.summary;
-            });
+            this.getOrganization();
         },
         mounted: function(){
         },
         methods: {
-        ...mapActions('organizationStore', ['saveOrganization']),
+        ...mapActions('organizationStore', ['getOrgData','saveOrganization']),
+            getOrganization(){
+                this.getOrgData({ id:this.user.orgId,
+                    token:this.$store.getters.token} )
+                    .then(()=>{
+                        this.form.name=this.organization.name
+                        this.form.summary=this.organization.summary;
+                    });
+            },
             submit(){
                 console.log(this.organization);
                 console.log(this.$store.getters.token);
