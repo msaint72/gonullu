@@ -16,7 +16,6 @@ export default {
             });
     },
     getUser(user) {
-        console.log();
         return AXIOS.get(`/user/` + user.userId,{ headers: { Authorization: user.token } });
     },
     getOrganization(user) {
@@ -25,14 +24,17 @@ export default {
     },
     updateOrganization(organization,token) {
         console.log(organization);
-        console.log(token);
         return AXIOS.put(`/organization/`+organization.id,
             { name:organization.name,
                     summary:organization.summary,
                     phone:organization.phone,
-                    web:organization.web},
+                    web:organization.web,
+                    causes:[...organization.causes]},
             { headers: { Authorization: token } }
             );
+    },
+    getCauseList(user) {
+        return AXIOS.get(`/reference/cause`,{ headers: { Authorization: user.token } });
     }
 }
 

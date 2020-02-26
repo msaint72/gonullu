@@ -19,8 +19,19 @@
                                 placeholder="Enter organization name"
                         ></b-form-input>
                     </b-form-group>
-
-                    <b-form-group
+                    <b-form-group description="Organization causes">
+                        <multiselect
+                                v-model="form.causes"
+                                :options="causeList"
+                                :multiple="true"
+                                :close-on-select="false"
+                                :clear-on-select="false"
+                                :preserve-search="true"
+                                placeholder="Choose organization causes" label="name" track-by="name" :preselect-first="false">
+                            <template slot="selection" slot-scope="{ values, search, isOpen }"></template>
+                        </multiselect>
+                    </b-form-group>
+                        <b-form-group
                             description="Organization description">
                         <b-form-textarea
                                 rows="3"
@@ -53,12 +64,15 @@
         </b-row>
     </b-container>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script>
 
     import {mapGetters,mapActions} from 'vuex';
+    import Multiselect from 'vue-multiselect';
     export default {
-
-    data() {
+        components: {
+            Multiselect
+        },        data() {
             return {
                 form: {
                     name: '',
@@ -72,13 +86,15 @@
                     web:'',
                     checked: []
                 },
+                value: [],
                 show: true,
                 provinces: [{ text: 'Select Province', value: null }, 'Ankara', 'İstanbul', 'İzmir', 'Konya'],
                 districts: [{ text: 'Select District', value: null }, 'Çankaya', 'Keçiören', 'Yenimahalle'],
+                causeOptionList: [{name:'Hayvan Hakları'},{name:'Din'},{name:'Sağlık'},{name:'Çevre'},{name:'Kültür Sanat'}]
             }
         },
         computed :{
-            ...mapGetters(['user']),
+            ...mapGetters(['user','causeList']),
             ...mapGetters('organizationStore', ['organization']),
         },
         created(){
@@ -88,8 +104,9 @@
         mounted: function(){
         },
         methods: {
-        ...mapActions('organizationStore', ['getOrgData','saveOrganization']),
+        ...mapActions('organizationStore', ['getOrgData','saveOrganization','getCauseList']),
             getOrganization(){
+                console.log("getting org data...");
                 this.getOrgData({ id:this.user.orgId,
                     token:this.$store.getters.token} )
                     .then(()=>{
@@ -97,10 +114,17 @@
                         this.form.summary=this.organization.summary,
                         this.form.phone=this.organization.phone,
                         this.form.web=this.organization.web;
+                        console.log("len:"+this.form.causes.length);
+                        if(this.form.causes.length==0){
+                            this.organization.causes.forEach((cause)=>{
+                                console.log(cause.name);
+                                this.form.causes.push({name: cause.name});
+                            });
+                        }
                     });
             },
             submit(){
-                console.log(this.organization);
+                console.log(this.form);
                 console.log(this.$store.getters.token);
                 this.saveOrganization(
                         { organization: {
@@ -108,8 +132,18 @@
                                 name : this.form.name,
                                 summary: this.form.summary,
                                 phone: this.form.phone,
-                                web:this.form.web
+                                web:this.form.web,
+                                causes:[...this.form.causes]
                             }, token:this.$store.getters.token});
+            },
+            getCauses(){
+                console.log("getting causes...");
+                this.getCauseList({token:this.$store.getters.token})
+                    .then(()=>{
+                        console.log("cause list:");
+                        console.log(this.causes);
+                        this.causeList=this.causes;
+                    })
             }
         }
     }

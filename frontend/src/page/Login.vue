@@ -28,8 +28,8 @@ export default {
   data () {
     return {
       loginError: false,
-      email: '',
-      password: '',
+      email: 'test@test.com',
+      password: 'test',
       error: false,
       errors: []
     }

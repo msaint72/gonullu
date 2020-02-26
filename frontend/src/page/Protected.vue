@@ -48,7 +48,10 @@ export default {
   created(){
     this.$store.dispatch('getUserData',
             { userId:this.$store.getters.userId,
-              token:this.$store.getters.token} )
+              token:this.$store.getters.token} );
+    this.$store.dispatch('getCauseList',
+            { userId:this.$store.getters.userId,
+              token:this.$store.getters.token} );
   },
   methods: {
     getSecuredTextFromBackend() {

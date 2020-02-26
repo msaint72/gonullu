@@ -9,12 +9,27 @@ import java.util.List;
 public class OrganizationDetailsRequestModel {
     private String name;
     private String summary;
-
     private String address;
     // province ...
     private String phone;
     private String web;
-//    private List<Cause> causes=new ArrayList<>();
+    private List<Cause> causes=new ArrayList<>();
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<Cause> getCauses() {
+        return causes;
+    }
+
+    public void setCauses(List<Cause> causes) {
+        this.causes = causes;
+    }
 
     public String getName() {
         return name;

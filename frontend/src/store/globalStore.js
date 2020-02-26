@@ -19,7 +19,8 @@ export default {
             orgId:null,
             username:null,
             userPass: null
-        }
+        },
+        causeList:[]
     },
     mutations: {
         login_success(state, userData){
@@ -51,6 +52,14 @@ export default {
             state.user.lastName=userData.lastName;
             state.user.orgName=userData.orgName;
             state.user.orgId=userData.orgId;
+        },
+        setCauses(state,causeList){
+            console.log(causeList);
+
+            causeList.forEach((cause)=>{
+                console.log(cause.name);
+                state.causeList.push({name: cause.name});
+            });
         }
     },
     actions: {
@@ -105,6 +114,21 @@ export default {
                 .catch(error => {
                         console.log("Error: " + error);
                 });
+        },
+        getCauseList({commit,state},userData){
+            console.log("getting cause list...");
+            if(state.causeList.length==0){
+                api.getCauseList(userData)
+                    .then(response=>{
+                        console.log(response);
+                        if(response.status == 200) {
+                            commit('setCauses',response.data);
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Error: " + error);
+                    });
+            }
         }
     },
     getters: {
@@ -113,6 +137,7 @@ export default {
         getEmail: state => state.user.email,
         userId:state=>state.user.userId,
         token:state=>state.idToken,
-        user: state=>state.user
+        user: state=>state.user,
+        causeList:state=>state.causeList
     }
 }
